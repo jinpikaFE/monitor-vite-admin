@@ -1,5 +1,5 @@
 import { getMonitorList } from '@/apis/home'
-import { PERFORMANCE_TYPE } from '@/apis/home/enum'
+import { EVENTTYPES, PERFORMANCE_TYPE } from '@/apis/home/enum'
 import ExcelTable from '@/components/exportExcel'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
@@ -77,7 +77,7 @@ const PerformanceTable: React.FC = () => {
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
-          type: 'performance',
+          type: EVENTTYPES.PERFORMANCE,
           apikey: 'vite-react-ts-admin'
         })
         return data

@@ -248,7 +248,22 @@ const toTree = ({
   return val
 }
 
+/** enum 转map */
+const enumToMap = (enumeration: any): Map<any, any> => {
+  const map = new Map()
+
+  Object.keys(enumeration).forEach(key => {
+    const value = enumeration[key]
+    if (typeof value !== 'number') {
+      map.set(key, value)
+    }
+  })
+
+  return map
+}
+
 export {
+  enumToMap,
   uuid,
   arrRemove,
   uniqueElementsBy,

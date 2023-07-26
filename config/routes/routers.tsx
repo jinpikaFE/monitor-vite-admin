@@ -1,7 +1,6 @@
 import { RouteType } from '.'
 import NotFoundPage from '@/404'
 import App from '@/App'
-import Permission from '@/components/permissions/Permission'
 import ErrorPage from '@/ErrorPage'
 import ComponManagement from '@/pages/accessManagement/ComponManagement'
 import ResourceManangement from '@/pages/accessManagement/ResourceManangement'
@@ -14,6 +13,7 @@ import Test from '@/pages/Test'
 import TestChild from '@/pages/Test/TestChild'
 import { HomeFilled, LockOutlined, SmileFilled } from '@ant-design/icons'
 import { Navigate } from 'react-router-dom'
+import projects from './projects'
 
 export const routers = [
   {
@@ -36,6 +36,7 @@ export const routers = [
         element: <Home />,
         permissionObj: true
       },
+      projects,
       {
         path: '/frist',
         name: '嵌套路由',
