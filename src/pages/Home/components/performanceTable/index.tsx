@@ -4,9 +4,11 @@ import ExcelTable from '@/components/exportExcel'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
 import { ActionType } from '@ant-design/pro-components'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
+import { MonitorContext } from '../../context'
 
 const PerformanceTable: React.FC = () => {
+  const monitorContext = useContext(MonitorContext)
   const actionRef = useRef<ActionType>()
 
   return (
@@ -74,11 +76,11 @@ const PerformanceTable: React.FC = () => {
         pageSize: 10
       }}
       rowKey="_time"
+      params={{ apikey: monitorContext?.apikeyType }}
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
-          type: EVENTTYPES.PERFORMANCE,
-          apikey: 'vite-react-ts-admin'
+          type: EVENTTYPES.PERFORMANCE
         })
         return data
       }}

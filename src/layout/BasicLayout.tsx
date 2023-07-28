@@ -115,61 +115,6 @@ const BasicLayout: React.FC = () => {
               navigate(key || '/')
             }
           }}
-          colorPrimary="black"
-          token={{
-            colorBgAppListIconHover: 'rgba(30, 30, 30, 0.9)',
-            colorTextAppListIconHover: '#ffffff',
-            colorTextAppListIcon: '#ffffff',
-            bgLayout: 'rgba(30, 30, 30, 0.9)',
-            sider: {
-              // 菜单背景颜色
-              colorMenuBackground: 'transparent',
-              // 侧边栏的标题字体颜色
-              colorTextMenuTitle: '#fff',
-              // menuItem 分割线的颜色
-              colorMenuItemDivider: '#fff',
-              // menuItem 的字体颜色
-              colorTextMenu: '#fff',
-              // menu 的二级字体颜色，比如 footer 和 action 的 icon
-              colorTextMenuSecondary: '#fff',
-              // menuItem 的选中字体颜色
-              colorTextMenuSelected: '#fff',
-              // menuItem hover 的选中字体颜色
-              colorTextMenuActive: 'rgba(255,255,255, 0.85)',
-              // menuItem 的 hover 字体颜色
-              colorTextMenuItemHover: 'rgba(255,255,255,0.75)',
-              // menuItem 的 hover 背景颜色
-              colorBgMenuItemHover: 'rgba(90, 75, 75, 0.03)',
-              // menuItem 的选中背景颜色
-              colorBgMenuItemSelected: 'rgba(255,255,255, 0.04)',
-              // 收起 menuItem 的弹出菜单背景颜色
-              colorBgMenuItemCollapsedElevated: 'transparent',
-              // 展开收起按钮背景颜色
-              colorBgCollapsedButton: '#fff',
-              // 展开收起按钮字体颜色
-              colorTextCollapsedButton: 'colorTextMenuSecondary',
-              // 展开收起按钮 hover 时字体颜色
-              colorTextCollapsedButtonHover: 'colorTextMenu'
-            },
-            header: {
-              // 菜单背景颜色
-              colorBgHeader: 'rgba(30, 30, 30, 0.25)',
-              // 侧边栏的标题字体颜色
-              colorHeaderTitle: '#fff',
-              // menuItem 分割线的颜色
-              colorTextMenu: '#fff',
-              // menu 的二级字体颜色，比如 footer 和 action 的 icon
-              colorTextMenuSecondary: '#fff',
-              // menuItem 的选中字体颜色
-              colorTextMenuSelected: '#fff',
-              // menuItem hover 的选中字体颜色
-              colorTextMenuActive: 'rgba(255,255,255, 0.85)',
-              // menuItem 的 hover 字体颜色
-              colorBgMenuItemHover: 'rgba(255,255,255,0.75)',
-              // menuItem 的 hover 背景颜色
-              colorBgMenuItemSelected: 'rgba(90, 75, 75, 0.03)'
-            }
-          }}
           {...Settings}
         >
           <PageContainer>
