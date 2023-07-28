@@ -3,7 +3,7 @@ import { storage } from '@/utils/Storage'
 import { PageContainer, ProLayout } from '@ant-design/pro-components'
 import { RouteType, router } from '@config/routes'
 import { useAsyncEffect } from 'ahooks'
-import { ConfigProvider, Dropdown, MenuProps } from 'antd'
+import { Dropdown, MenuProps } from 'antd'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import defaultProps from '@/_defaultProps'
@@ -75,103 +75,91 @@ const BasicLayout: React.FC = () => {
   ]
 
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorBgBase: '#1E1E1F',
-          colorTextBase: '#fff',
-          colorLink: 'rgba(244, 196, 109, 1)',
-          colorLinkActive: 'rgba(244, 196, 109, 0.8)',
-          colorLinkHover: 'rgba(244, 196, 109, 0.8)'
-        }
-      }}
-    >
-      <GlobalUserInfo.Provider value={storeGlobalUser.userInfo}>
-        <div className={styles.container}>
-          {showLayout ? (
-            <ProLayout
-              {...defaultProps}
-              route={reduceRouter(router?.routes)?.[1]}
-              location={{
-                pathname
-              }}
-              avatarProps={{
-                src: storeGlobalUser.userInfo?.icon,
-                size: 'small',
-                title: <span style={{ color: '#fff' }}>{storeGlobalUser.userInfo?.username}</span>,
-                render: (_, defaultDom) => {
-                  return <Dropdown menu={{ items }}>{defaultDom}</Dropdown>
-                }
-              }}
-              menuFooterRender={props => {
-                return (
-                  <div
-                    style={{
-                      textAlign: 'center',
-                      paddingBlockStart: 12
-                    }}
-                  >
-                    <div>© 2023 Made with love</div>
-                    <div>by JPK</div>
-                  </div>
-                )
-              }}
-              menuRender={(props, defaultDom) => {
-                if ((props?.layout as string) === 'hide') {
-                  setShowLayout(false)
-                  return null
-                }
-                return defaultDom
-              }}
-              menuProps={{
-                onClick: ({ key }) => {
-                  navigate(key || '/')
-                }
-              }}
-              token={{
-                bgLayout: '#1E1E1F',
-                colorTextAppListIcon: '#FFFFFF',
-                colorTextAppListIconHover: 'rgba(244, 196, 109, 0.9)',
-                colorBgAppListIconHover: 'rgba(244, 196, 109, 0.1)',
-                sider: {
-                  colorTextMenuTitle: '#FFFFFF',
-                  colorTextMenu: '#FFFFFF',
-                  colorMenuItemDivider: '#FFFFFF',
-                  colorTextMenuSecondary: '#FFFFFF',
-                  colorTextMenuSelected: 'rgba(255, 171, 79, 1)',
-                  colorTextMenuActive: 'rgba(255, 171, 79, 0.85)',
-                  colorTextMenuItemHover: 'rgba(255, 171, 79, 0.65)',
-                  colorBgMenuItemHover: 'rgba(244, 196, 109, 0.1)',
-                  colorBgMenuItemSelected: 'rgba(244, 196, 109, 0.1)'
-                },
-                header: {
-                  colorBgHeader: '1E1E1F',
-                  colorHeaderTitle: '#FFFFFF',
-                  colorTextMenu: '#FFFFFF',
-                  colorTextMenuSecondary: '#FFFFFF',
-                  colorTextMenuSelected: 'rgba(255, 171, 79, 1)',
-                  colorTextMenuActive: 'rgba(255, 171, 79, 0.85)',
-                  colorTextRightActionsItem: 'rgba(255, 171, 79, 0.65)',
-                  colorBgMenuItemHover: 'rgba(244, 196, 109, 0.1)',
-                  colorBgMenuItemSelected: 'rgba(244, 196, 109, 0.1)',
-                  colorBgRightActionsItemHover: 'rgba(244, 196, 109, 0.1)'
-                },
-                pageContainer: {
-                  colorBgPageContainer: 'rgba(10, 10, 10, 1)'
-                }
-              }}
-              {...Settings}
-            >
-              <PageContainer>
-                <Outlet />
-              </PageContainer>
-            </ProLayout>
-          ) : (
-            <Outlet />
-          )}
-        </div>
-      </GlobalUserInfo.Provider>
-    </ConfigProvider>
+    <GlobalUserInfo.Provider value={storeGlobalUser.userInfo}>
+      <div className={styles.container}>
+        {showLayout ? (
+          <ProLayout
+            {...defaultProps}
+            route={reduceRouter(router?.routes)?.[1]}
+            location={{
+              pathname
+            }}
+            avatarProps={{
+              src: storeGlobalUser.userInfo?.icon,
+              size: 'small',
+              title: <span style={{ color: '#fff' }}>{storeGlobalUser.userInfo?.username}</span>,
+              render: (_, defaultDom) => {
+                return <Dropdown menu={{ items }}>{defaultDom}</Dropdown>
+              }
+            }}
+            menuFooterRender={props => {
+              return (
+                <div
+                  style={{
+                    textAlign: 'center',
+                    paddingBlockStart: 12
+                  }}
+                >
+                  <div>© 2023 Made with love</div>
+                  <div>by JPK</div>
+                </div>
+              )
+            }}
+            menuRender={(props, defaultDom) => {
+              if ((props?.layout as string) === 'hide') {
+                setShowLayout(false)
+                return null
+              }
+              return defaultDom
+            }}
+            menuProps={{
+              onClick: ({ key }) => {
+                navigate(key || '/')
+              }
+            }}
+            token={{
+              bgLayout: '#1E1E1F',
+              colorTextAppListIcon: '#FFFFFF',
+              colorTextAppListIconHover: 'rgba(244, 196, 109, 0.9)',
+              colorBgAppListIconHover: 'rgba(244, 196, 109, 0.1)',
+              sider: {
+                colorTextMenuTitle: '#FFFFFF',
+                colorTextMenu: '#FFFFFF',
+                colorMenuItemDivider: '#FFFFFF',
+                colorTextMenuSecondary: '#FFFFFF',
+                colorTextMenuSelected: 'rgba(255, 171, 79, 1)',
+                colorTextMenuActive: 'rgba(255, 171, 79, 0.85)',
+                colorTextMenuItemHover: 'rgba(255, 171, 79, 0.65)',
+                colorBgMenuItemHover: 'rgba(244, 196, 109, 0.1)',
+                colorBgMenuItemSelected: 'rgba(244, 196, 109, 0.1)'
+              },
+              header: {
+                colorBgHeader: '1E1E1F',
+                colorHeaderTitle: '#FFFFFF',
+                colorTextMenu: '#FFFFFF',
+                colorTextMenuSecondary: '#FFFFFF',
+                colorTextMenuSelected: 'rgba(255, 171, 79, 1)',
+                colorTextMenuActive: 'rgba(255, 171, 79, 0.85)',
+                colorTextRightActionsItem: 'rgba(255, 171, 79, 0.65)',
+                colorBgMenuItemHover: 'rgba(244, 196, 109, 0.1)',
+                colorBgMenuItemSelected: 'rgba(244, 196, 109, 0.1)',
+                colorBgRightActionsItemHover: 'rgba(244, 196, 109, 0.1)'
+              },
+              pageContainer: {
+                colorBgPageContainer: 'rgba(10, 10, 10, 1)'
+              }
+            }}
+            {...Settings}
+          >
+            <PageContainer>
+              <Outlet />
+            </PageContainer>
+          </ProLayout>
+        ) : (
+          <Outlet />
+        )}
+      </div>
+    </GlobalUserInfo.Provider>
   )
 }
 

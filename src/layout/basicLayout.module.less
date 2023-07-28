@@ -17,14 +17,14 @@
     .ant-page-header .ant-page-header-heading-title {
       color: rgba(255, 255, 255, 0.95);
     }
-
-    .ant-btn-primary {
-      box-shadow: unset;
-    }
   }
 }
 
 :global {
+  .ant-btn-primary {
+    box-shadow: unset;
+  }
+
   .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled),
   .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before,
   .ant-picker-dropdown
@@ -34,7 +34,11 @@
   .ant-picker-dropdown
     .ant-picker-cell-in-view.ant-picker-cell-range-end:not(
       .ant-picker-cell-range-end-single
-    )::before {
+    )::before,
+  .ant-picker-dropdown
+    .ant-picker-time-panel-column
+    > li.ant-picker-time-panel-cell-selected
+    .ant-picker-time-panel-cell-inner {
     background-color: rgba(255, 171, 79, 0.5);
   }
 
@@ -87,5 +91,19 @@
     )
     .ant-select-selector {
     box-shadow: unset;
+  }
+
+  .ant-picker-dropdown .ant-picker-time-panel-column {
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: rgba(255, 171, 79, 0.2);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 171, 79, 0.9);
+    }
   }
 }

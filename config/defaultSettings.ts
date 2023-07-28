@@ -4,7 +4,6 @@ import { ProSettings } from '@ant-design/pro-components'
 const Settings: ProSettings | undefined = {
   fixSiderbar: true,
   layout: 'mix',
-  colorPrimary: 'rgba(255, 171, 79, 1)'
   // splitMenus: true
 }
 
