@@ -1,0 +1,91 @@
+.container {
+  :global {
+    :where(.css-dev-only-do-not-override-1sn5buj).ant-menu-light.ant-menu-inline
+      .ant-menu-item::after {
+      border-inline-end: 1px solid rgba(255, 171, 79, 1);
+    }
+
+    .ant-pro .ant-pro-layout .ant-pro-layout-content {
+      min-height: calc(100vh - 56px);
+    }
+
+    .ant-breadcrumb a,
+    .ant-breadcrumb .ant-breadcrumb-separator {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .ant-page-header .ant-page-header-heading-title {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .ant-btn-primary {
+      box-shadow: unset;
+    }
+  }
+}
+
+:global {
+  .ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled),
+  .ant-picker-dropdown .ant-picker-cell-in-view.ant-picker-cell-in-range::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+      .ant-picker-cell-range-start-single
+    )::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-end:not(
+      .ant-picker-cell-range-end-single
+    )::before {
+    background-color: rgba(255, 171, 79, 0.5);
+  }
+
+  .ant-picker-focused {
+    box-shadow: unset;
+  }
+
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-start.ant-picker-cell-range-hover::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-end.ant-picker-cell-range-hover::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-start:not(
+      .ant-picker-cell-range-start-single
+    ).ant-picker-cell-range-hover-start::before,
+  .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-range-end:not(
+      .ant-picker-cell-range-end-single
+    ).ant-picker-cell-range-hover-end::before,
+  .ant-picker-panel
+    > :not(.ant-picker-date-panel)
+    .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start::before,
+  .ant-picker-panel
+    > :not(.ant-picker-date-panel)
+    .ant-picker-dropdown
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end::before {
+    background: rgba(255, 171, 79, 0.9);
+  }
+
+  .ant-picker-dropdown
+    .ant-picker-date-panel
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-start
+    .ant-picker-cell-inner::after,
+  .ant-picker-dropdown
+    .ant-picker-date-panel
+    .ant-picker-cell-in-view.ant-picker-cell-in-range.ant-picker-cell-range-hover-end
+    .ant-picker-cell-inner::after {
+    background: rgba(255, 171, 79, 0.9);
+  }
+
+  .ant-select-focused.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+      .ant-pagination-size-changer
+    )
+    .ant-select-selector {
+    box-shadow: unset;
+  }
+}

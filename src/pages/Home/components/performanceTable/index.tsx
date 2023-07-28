@@ -73,7 +73,7 @@ const PerformanceTable: React.FC = () => {
         syncToUrl: false
       }}
       pagination={{
-        pageSize: 10
+        defaultPageSize: 10
       }}
       rowKey="_time"
       params={{ apikey: monitorContext?.apikeyType }}

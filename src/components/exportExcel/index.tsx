@@ -161,7 +161,6 @@ const ExcelTable: FC<IExcelTable> = forwardRef((props, formRefMy: any) => {
           }
         }}
         pagination={{
-          pageSize: 20,
           showSizeChanger: true,
           showQuickJumper: true
         }}
