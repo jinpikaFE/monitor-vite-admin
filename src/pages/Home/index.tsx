@@ -1,17 +1,24 @@
-import { ProCard, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components'
+import { ProCard, ProFormDateTimeRangePicker, ProFormSelect } from '@ant-design/pro-components'
 import PerformanceTable from './components/performanceTable'
 import { getApikeyList } from '@/apis/projects'
 import { useState } from 'react'
 import { MonitorContext } from './context'
 import { Space } from 'antd'
+import { getFirstDayOfMonth } from '@/utils/date'
+import { formatToDateTime } from '@/utils/dateUtil'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<number>()
+  const [rangeTime, setRangeTime] = useState<any>([
+    getFirstDayOfMonth(new Date()),
+    formatToDateTime(new Date())
+  ])
 
   return (
     <MonitorContext.Provider
       value={{
-        apikeyType
+        apikeyType,
+        rangeTime
       }}
     >
       <ProCard style={{ marginBottom: 16 }}>
@@ -38,7 +45,14 @@ const Home: React.FC = () => {
               return []
             }}
           />
-          <ProFormDateRangePicker />
+          <ProFormDateTimeRangePicker
+            fieldProps={{
+              value: rangeTime,
+              onChange: val => {
+                setRangeTime(val)
+              }
+            }}
+          />
         </Space>
       </ProCard>
       <PerformanceTable />

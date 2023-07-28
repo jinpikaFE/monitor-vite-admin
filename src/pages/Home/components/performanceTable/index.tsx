@@ -35,8 +35,7 @@ const PerformanceTable: React.FC = () => {
           title: '时间',
           dataIndex: 'time',
           hideInTable: true,
-          valueType: 'dateTimeRange',
-          initialValue: [getFirstDayOfMonth(new Date()), formatToDateTime(new Date())],
+          valueType: 'dateTime',
           search: {
             transform: val => ({
               startTime: val?.[0],
