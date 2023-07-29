@@ -3,13 +3,21 @@ import { EVENTTYPES, PERFORMANCE_TYPE } from '@/apis/home/enum'
 import ExcelTable from '@/components/exportExcel'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
-import { ActionType } from '@ant-design/pro-components'
-import { useContext, useRef } from 'react'
+import { ActionType, FormInstance } from '@ant-design/pro-components'
+import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 
 const PerformanceTable: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
   const actionRef = useRef<ActionType>()
+  const formRef = useRef<FormInstance>()
+
+  useEffect(() => {
+    formRef?.current?.setFieldsValue({
+      time: monitorContext?.rangeTime
+    })
+    formRef?.current?.submit()
+  }, [monitorContext?.rangeTime])
 
   return (
     <ExcelTable
@@ -35,7 +43,7 @@ const PerformanceTable: React.FC = () => {
           title: '时间',
           dataIndex: 'time',
           hideInTable: true,
-          valueType: 'dateTime',
+          valueType: 'dateTimeRange',
           search: {
             transform: val => ({
               startTime: val?.[0],
@@ -84,6 +92,7 @@ const PerformanceTable: React.FC = () => {
         return data
       }}
       actionRef={actionRef}
+      formRef={formRef}
       rowSelection={false}
       toolBarRenderFn={() => []}
     />
