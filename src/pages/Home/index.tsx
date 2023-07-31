@@ -3,9 +3,14 @@ import PerformanceTable from './components/performanceTable'
 import { getApikeyList } from '@/apis/projects'
 import { useState } from 'react'
 import { MonitorContext } from './context'
-import { Space } from 'antd'
+import { Row, Space } from 'antd'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
+import Unhandledrejection from './components/unhandledrejection'
+import ErrorInfo from './components/errorInfo'
+import XhrInfo from './components/xhrInfo'
+import FetchInfo from './components/fetchInfo'
+import Resource from './components/resource'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<number>()
@@ -55,7 +60,26 @@ const Home: React.FC = () => {
           />
         </Space>
       </ProCard>
-      <PerformanceTable />
+      <ProCard ghost gutter={[16, 16]}>
+        <PerformanceTable />
+      </ProCard>
+      <ProCard ghost gutter={[16, 16]}>
+        <ProCard ghost>
+          <ErrorInfo />
+        </ProCard>
+        <ProCard ghost>
+          <Unhandledrejection />
+        </ProCard>
+      </ProCard>
+      <ProCard ghost gutter={[16, 16]} wrap>
+        <XhrInfo />
+      </ProCard>
+      <ProCard ghost gutter={[16, 16]}>
+        <ProCard ghost>
+          <Resource />
+        </ProCard>
+        <ProCard ghost>{/* <FetchInfo /> */}</ProCard>
+      </ProCard>
     </MonitorContext.Provider>
   )
 }

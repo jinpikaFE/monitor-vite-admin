@@ -2,7 +2,7 @@
  * 事件类型
  */
 export enum EVENTTYPES {
-  XHR = 'xhr',
+  API_ERR = 'apiErr',
   FETCH = 'fetch',
   CLICK = 'click',
   HISTORY = 'history',
@@ -14,8 +14,11 @@ export enum EVENTTYPES {
   VUE = 'vue',
   REACT = 'react',
   CUSTOM = 'custom',
+  /** 性能指标 */
   PERFORMANCE = 'performance',
+  /** 录屏信息 */
   RECORDSCREEN = 'recordScreen',
+  /** 白屏 */
   WHITESCREEN = 'whiteScreen'
 }
 
