@@ -22,6 +22,7 @@ const PerformanceTable: React.FC = () => {
   return (
     <ExcelTable
       headerTitle="性能监控"
+      ignoreFieldNames={['time']}
       columns={[
         {
           title: '指标名称',
@@ -49,6 +50,9 @@ const PerformanceTable: React.FC = () => {
               startTime: val?.[0],
               endTime: val?.[1]
             })
+          },
+          formItemProps: {
+            hidden: true
           }
         },
         /** search */
@@ -68,6 +72,31 @@ const PerformanceTable: React.FC = () => {
           dataIndex: 'pageUrl',
           hideInSearch: true,
           ellipsis: true
+        },
+        {
+          title: '设备信息',
+          dataIndex: 'deviceInfo',
+          hideInSearch: true,
+          render(dom, entity, index, action, schema) {
+            return entity?.deviceInfo ? (
+              <>
+                <p>
+                  {entity?.deviceInfo?.browser} {entity?.deviceInfo?.browserVersion}
+                </p>
+                <p>
+                  {entity?.deviceInfo?.device_type} {entity?.deviceInfo?.device}{' '}
+                  {entity?.deviceInfo?.os} {entity?.deviceInfo?.osVersion}
+                </p>
+              </>
+            ) : (
+              '-'
+            )
+          }
+        },
+        {
+          title: '项目名',
+          dataIndex: 'apikey',
+          hideInSearch: true
         },
         {
           title: '时间',

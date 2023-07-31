@@ -24,6 +24,8 @@ type IExcelTable = {
   /** 自定义state key */
   customKeys?: any[]
   setCustomKeys?: React.Dispatch<React.SetStateAction<any[]>>
+  /** 忽略重置字段 */
+  ignoreFieldNames?: string[]
 } & ProTableProps<any, any>
 
 const ExcelTable: FC<IExcelTable> = forwardRef((props, formRefMy: any) => {
@@ -38,6 +40,7 @@ const ExcelTable: FC<IExcelTable> = forwardRef((props, formRefMy: any) => {
     initRowKey,
     customKeys,
     setCustomKeys,
+    ignoreFieldNames,
     ...otherProps
   } = props
   const [selectedRowKeys, setSelectedRowKeys] = useState<any>(initRowKey || [])
@@ -139,7 +142,15 @@ const ExcelTable: FC<IExcelTable> = forwardRef((props, formRefMy: any) => {
                 const keyArr = (searchConfig as any)?.items?.map(
                   (item: { props: { name: any } }) => [item?.props?.name, undefined]
                 )
-                formProps?.form?.setFieldsValue(Object.fromEntries(new Map(keyArr).entries()))
+                formProps?.form?.setFieldsValue(
+                  Object.fromEntries(
+                    new Map(
+                      keyArr?.filter?.(
+                        (e: [string, undefined]) => !ignoreFieldNames?.includes(e?.[0])
+                      )
+                    ).entries()
+                  )
+                )
                 formProps?.form?.submit()
               }}
             >

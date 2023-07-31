@@ -10,3 +10,12 @@ export async function getMonitorList(params: Partial<Monitor.MonitorParams> & Gl
     baseURL: VITE_MONITOR_URL
   })
 }
+
+export async function getEchartMonitorList(params: Partial<Monitor.MonitorParams>) {
+  return http.request({
+    url: '/v1/monitor/echart',
+    method: 'get',
+    params,
+    baseURL: VITE_MONITOR_URL
+  })
+}
