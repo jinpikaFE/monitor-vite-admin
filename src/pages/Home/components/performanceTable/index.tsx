@@ -71,6 +71,11 @@ const PerformanceTable: React.FC = () => {
           hideInSearch: true
         },
         {
+          title: '评分',
+          dataIndex: 'rating',
+          hideInSearch: true
+        },
+        {
           title: '设备信息',
           dataIndex: 'deviceInfo',
           hideInSearch: true,

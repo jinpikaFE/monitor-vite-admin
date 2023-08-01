@@ -10,6 +10,7 @@ import Unhandledrejection from './components/unhandledrejection'
 import ErrorInfo from './components/errorInfo'
 import XhrInfo from './components/xhrInfo'
 import Resource from './components/resource'
+import PerformanceCharts from './components/performanceCharts'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<number>()
@@ -59,6 +60,7 @@ const Home: React.FC = () => {
           />
         </Space>
       </ProCard>
+      <PerformanceCharts />
       <ProCard ghost gutter={[16, 16]}>
         <PerformanceTable />
       </ProCard>
