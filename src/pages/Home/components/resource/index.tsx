@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import BreadcrumbBtn from '../breadcrumbBtn'
+import PlayScreen from '../playScreen'
 
 const Resource: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -24,6 +25,7 @@ const Resource: React.FC = () => {
       headerTitle="resource错误"
       ignoreFieldNames={['time']}
       className={styles.container}
+      scroll={{ x: 1200 }}
       columns={[
         {
           title: '时间',
@@ -92,8 +94,12 @@ const Resource: React.FC = () => {
           title: '操作',
           key: 'option',
           valueType: 'option',
+          width: '20%',
           fixed: 'right',
-          render: (_, entity) => [<BreadcrumbBtn record={entity} key="behavior" />]
+          render: (_, entity) => [
+            <BreadcrumbBtn record={entity} key="behavior" />,
+            <PlayScreen key="playScreen" record={entity} formRef={formRef} />
+          ]
         }
       ]}
       form={{

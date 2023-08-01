@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import BreadcrumbBtn from '../breadcrumbBtn'
+import PlayScreen from '../playScreen'
 
 const XhrInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -110,7 +111,11 @@ const XhrInfo: React.FC = () => {
           key: 'option',
           valueType: 'option',
           fixed: 'right',
-          render: (_, entity) => [<BreadcrumbBtn record={entity} key="behavior" />]
+          width: '20%',
+          render: (_, entity) => [
+            <BreadcrumbBtn record={entity} key="behavior" />,
+            <PlayScreen key="playScreen" record={entity} formRef={formRef} />
+          ]
         }
       ]}
       form={{

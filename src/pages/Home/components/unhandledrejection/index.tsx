@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import BreadcrumbBtn from '../breadcrumbBtn'
+import PlayScreen from '../playScreen'
 
 const Unhandledrejection: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -113,8 +114,12 @@ const Unhandledrejection: React.FC = () => {
           title: '操作',
           key: 'option',
           valueType: 'option',
+          width: '20%',
           fixed: 'right',
-          render: (_, entity) => [<BreadcrumbBtn record={entity} key="behavior" />]
+          render: (_, entity) => [
+            <BreadcrumbBtn record={entity} key="behavior" />,
+            <PlayScreen key="playScreen" record={entity} formRef={formRef} />
+          ]
         }
       ]}
       form={{
