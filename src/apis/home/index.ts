@@ -19,3 +19,11 @@ export async function getEchartMonitorList(params: Partial<Monitor.MonitorParams
     baseURL: VITE_MONITOR_URL
   })
 }
+
+export async function getMonitorScreen(params: { id: string }) {
+  return http.request({
+    url: `/v1/monitor/screen/${params?.id}`,
+    method: 'get',
+    baseURL: VITE_MONITOR_URL
+  })
+}

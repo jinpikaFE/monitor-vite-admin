@@ -1,8 +1,5 @@
-import { getEchartMonitorList } from '@/apis/home'
-import { EVENTTYPES } from '@/apis/home/enum'
+import { getMonitorScreen } from '@/apis/home'
 import { Button, FormInstance, Modal } from 'antd'
-import { useContext, useEffect, useRef } from 'react'
-import { MonitorContext } from '../../context'
 import { useReactive } from 'ahooks'
 import ScreenContainer from './screenContainer'
 
@@ -14,8 +11,7 @@ export type ModalPropsType = {
 const PlayScreen: React.FC<{
   record: any
   formRef: React.MutableRefObject<FormInstance<any> | undefined>
-}> = ({ record, formRef }) => {
-  const monitorContext = useContext(MonitorContext)
+}> = ({ record }) => {
   const modalProps = useReactive<ModalPropsType>({
     open: false,
     events: undefined
@@ -27,17 +23,12 @@ const PlayScreen: React.FC<{
         key="playScreen"
         type="primary"
         onClick={async () => {
-          const time = formRef?.current?.getFieldsValue()?.time
-          const res = await getEchartMonitorList({
-            startTime: time?.[0],
-            endTime: time?.[1],
-            type: EVENTTYPES.RECORDSCREEN,
-            apikey: monitorContext?.apikeyType,
-            recordScreenId: record?.recordScreenId
+          const res = await getMonitorScreen({
+            id: record?.recordScreenId
           })
           if (res?.code === 200) {
             modalProps.open = true
-            modalProps.events = res?.data?.list?.[0]?.events
+            modalProps.events = res?.data?.[0]?.events
           }
         }}
       >

@@ -76,7 +76,7 @@ const Home: React.FC = () => {
         <XhrInfo />
       </ProCard>
       <ProCard ghost gutter={[16, 16]}>
-        <ProCard ghost>
+        <ProCard ghost colSpan={12}>
           <Resource />
         </ProCard>
         <ProCard ghost>{/* <FetchInfo /> */}</ProCard>
