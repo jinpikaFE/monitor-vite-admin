@@ -49,8 +49,7 @@ const XhrInfo: React.FC = () => {
         {
           title: '触发地址',
           dataIndex: 'pageUrl',
-          hideInSearch: true,
-          ellipsis: true
+          hideInSearch: true
         },
         {
           title: '设备信息',

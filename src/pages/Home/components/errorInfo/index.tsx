@@ -23,6 +23,7 @@ const ErrorInfo: React.FC = () => {
       headerTitle="错误"
       ignoreFieldNames={['time']}
       className={styles.container}
+      scroll={{x:1200}}
       columns={[
         {
           title: '时间',
@@ -47,15 +48,14 @@ const ErrorInfo: React.FC = () => {
           ellipsis: true
         },
         {
-          title: '指标名称',
-          dataIndex: 'name',
+          title: '信息',
+          dataIndex: 'message',
           hideInSearch: true
         },
         {
           title: '触发地址',
           dataIndex: 'pageUrl',
-          hideInSearch: true,
-          ellipsis: true
+          hideInSearch: true
         },
         {
           title: '设备信息',
@@ -74,6 +74,26 @@ const ErrorInfo: React.FC = () => {
               </>
             ) : (
               '-'
+            )
+          }
+        },
+        {
+          title: '错误文件',
+          dataIndex: 'fileName',
+          hideInSearch: true,
+          ellipsis: true
+        },
+        {
+          title: '错误文件信息',
+          dataIndex: 'line_column',
+          hideInSearch: true,
+          render(dom, entity) {
+            return (
+              <>
+                <p>
+                  行：{entity?.line} 列：{entity?.column}
+                </p>
+              </>
             )
           }
         },

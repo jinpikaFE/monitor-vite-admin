@@ -3,13 +3,12 @@ import PerformanceTable from './components/performanceTable'
 import { getApikeyList } from '@/apis/projects'
 import { useState } from 'react'
 import { MonitorContext } from './context'
-import { Row, Space } from 'antd'
+import { Space } from 'antd'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
 import Unhandledrejection from './components/unhandledrejection'
 import ErrorInfo from './components/errorInfo'
 import XhrInfo from './components/xhrInfo'
-import FetchInfo from './components/fetchInfo'
 import Resource from './components/resource'
 
 const Home: React.FC = () => {
@@ -64,10 +63,10 @@ const Home: React.FC = () => {
         <PerformanceTable />
       </ProCard>
       <ProCard ghost gutter={[16, 16]}>
-        <ProCard ghost>
+        <ProCard ghost colSpan={12}>
           <ErrorInfo />
         </ProCard>
-        <ProCard ghost>
+        <ProCard ghost colSpan={12}>
           <Unhandledrejection />
         </ProCard>
       </ProCard>

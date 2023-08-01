@@ -4,7 +4,6 @@ import ExcelTable from '@/components/exportExcel'
 import { ActionType, FormInstance } from '@ant-design/pro-components'
 import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
-import styles from '../common.module.less'
 
 const PerformanceTable: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -22,7 +21,6 @@ const PerformanceTable: React.FC = () => {
     <ExcelTable
       headerTitle="性能监控"
       ignoreFieldNames={['time']}
-      className={styles.container}
       columns={[
         {
           title: '指标名称',
@@ -70,8 +68,7 @@ const PerformanceTable: React.FC = () => {
         {
           title: '触发地址',
           dataIndex: 'pageUrl',
-          hideInSearch: true,
-          ellipsis: true
+          hideInSearch: true
         },
         {
           title: '设备信息',

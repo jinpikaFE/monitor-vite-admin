@@ -47,15 +47,14 @@ const Resource: React.FC = () => {
           ellipsis: true
         },
         {
-          title: '指标名称',
-          dataIndex: 'name',
+          title: '信息',
+          dataIndex: 'message',
           hideInSearch: true
         },
         {
           title: '触发地址',
           dataIndex: 'pageUrl',
-          hideInSearch: true,
-          ellipsis: true
+          hideInSearch: true
         },
         {
           title: '设备信息',
