@@ -5,6 +5,8 @@ import { ActionType, FormInstance } from '@ant-design/pro-components'
 import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
+import { Button } from 'antd'
+import BreadcrumbBtn from '../breadcrumbBtn'
 
 const ErrorInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -23,7 +25,7 @@ const ErrorInfo: React.FC = () => {
       headerTitle="错误"
       ignoreFieldNames={['time']}
       className={styles.container}
-      scroll={{x:1200}}
+      scroll={{ x: 1200 }}
       columns={[
         {
           title: '时间',
@@ -107,6 +109,13 @@ const ErrorInfo: React.FC = () => {
           dataIndex: '_time',
           hideInSearch: true,
           valueType: 'dateTime'
+        },
+        {
+          title: '操作',
+          key: 'option',
+          valueType: 'option',
+          fixed: 'right',
+          render: (_, entity) => [<BreadcrumbBtn record={entity} key="behavior" />]
         }
       ]}
       form={{

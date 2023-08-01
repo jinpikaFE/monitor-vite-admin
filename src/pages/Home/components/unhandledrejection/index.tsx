@@ -5,6 +5,7 @@ import { ActionType, FormInstance } from '@ant-design/pro-components'
 import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
+import BreadcrumbBtn from '../breadcrumbBtn'
 
 const Unhandledrejection: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -107,6 +108,13 @@ const Unhandledrejection: React.FC = () => {
           dataIndex: '_time',
           hideInSearch: true,
           valueType: 'dateTime'
+        },
+        {
+          title: '操作',
+          key: 'option',
+          valueType: 'option',
+          fixed: 'right',
+          render: (_, entity) => [<BreadcrumbBtn record={entity} key="behavior" />]
         }
       ]}
       form={{
