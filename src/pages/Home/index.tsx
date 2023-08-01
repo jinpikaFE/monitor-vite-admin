@@ -13,7 +13,7 @@ import Resource from './components/resource'
 import PerformanceCharts from './components/performanceCharts'
 
 const Home: React.FC = () => {
-  const [apikeyType, setApikeyType] = useState<number>()
+  const [apikeyType, setApikeyType] = useState<string>()
   const [rangeTime, setRangeTime] = useState<any>([
     getFirstDayOfMonth(new Date()),
     formatToDateTime(new Date())

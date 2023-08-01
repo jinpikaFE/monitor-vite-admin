@@ -1,6 +1,6 @@
 import React from 'react'
 
 export const MonitorContext = React.createContext<{
-  apikeyType?: number
+  apikeyType?: string
   rangeTime?: any
 }>({})

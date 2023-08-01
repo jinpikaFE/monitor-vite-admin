@@ -11,6 +11,9 @@ dependencies:
   '@ant-design/pro-components':
     specifier: ^2.4.0
     version: 2.4.0(antd@5.3.0)(prop-types@15.8.1)(rc-field-form@1.27.4)(react-dom@18.2.0)(react@18.2.0)
+  '@types/pako':
+    specifier: ^2.0.0
+    version: 2.0.0
   '@types/qs':
     specifier: ^6.9.7
     version: 6.9.7
@@ -41,6 +44,9 @@ dependencies:
   echarts-wordcloud:
     specifier: ^2.0.0
     version: 2.0.0(echarts@5.4.3)
+  js-base64:
+    specifier: ^3.7.5
+    version: 3.7.5
   less:
     specifier: ^4.1.3
     version: 4.1.3
@@ -56,6 +62,9 @@ dependencies:
   moment:
     specifier: ^2.29.4
     version: 2.29.4
+  pako:
+    specifier: ^2.1.0
+    version: 2.1.0
   postcss:
     specifier: ^8.4.21
     version: 8.4.21
@@ -71,6 +80,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.8.2
     version: 6.8.2(react-dom@18.2.0)(react@18.2.0)
+  rrweb-player:
+    specifier: 1.0.0-alpha.4
+    version: 1.0.0-alpha.4
 
 devDependencies:
   '@babel/core':
@@ -1416,6 +1428,12 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /@rrweb/types@2.0.0-alpha.9:
+    resolution: {integrity: sha512-yS2KghLSmSSxo6H7tHrJ6u+nWJA9zCXaKFyc79rUSX8RHHSImRqocTqJ8jz794kCIWA90rvaQayRONdHO+vB0Q==}
+    dependencies:
+      rrweb-snapshot: 2.0.0-alpha.9
+    dev: false
+
   /@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
     dev: true
@@ -1431,6 +1449,10 @@ packages:
   /@tsconfig/node16@1.0.3:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: true
+
+  /@tsconfig/svelte@1.0.13:
+    resolution: {integrity: sha512-5lYJP45Xllo4yE/RUBccBT32eBlRDbqN8r1/MIvQbKxW3aFqaYPCNgm8D5V20X4ShHcwvYWNlKg3liDh1MlBoA==}
+    dev: false
 
   /@types/css-font-loading-module@0.0.7:
     resolution: {integrity: sha512-nl09VhutdjINdWyXxHWN/w9zlNCfr60JUqJbd24YXUuCwgeL0TpFSdElCwb6cxfB6ybE19Gjj4g0jsgkXxKv1Q==}
@@ -3495,6 +3517,10 @@ packages:
     resolution: {integrity: sha512-PAr6Xg2jvd7MCR6Ld9Jg3BmTcjYsHEBx1VlwEwULb/qowPf5VD9kEMagj23Gm7JRnSvE/Da/57nChZjnvL8v6A==}
     dev: false
 
+  /js-base64@3.7.5:
+    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
+    dev: false
+
   /js-cookie@2.2.1:
     resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
     dev: false
@@ -3893,6 +3919,10 @@ packages:
 
   /mitt@1.2.0:
     resolution: {integrity: sha512-r6lj77KlwqLhIUku9UWYes7KJtsczvolZkzp8hbaDPPaE24OmWl5s539Mytlj22siEQKosZ26qCBgda2PKwoJw==}
+    dev: false
+
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
     dev: false
 
   /mobx-react-lite@3.4.3(mobx@6.8.0)(react-dom@18.2.0)(react@18.2.0):
@@ -5139,8 +5169,29 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /rrdom@0.1.7:
+    resolution: {integrity: sha512-ZLd8f14z9pUy2Hk9y636cNv5Y2BMnNEY99wxzW9tD2BLDfe1xFxtLjB4q/xCBYo6HRe0wofzKzjm4JojmpBfFw==}
+    dependencies:
+      rrweb-snapshot: 2.0.0-alpha.4
+    dev: false
+
+  /rrweb-player@1.0.0-alpha.4:
+    resolution: {integrity: sha512-Wlmn9GZ5Fdqa37vd3TzsYdLl/JWEvXNUrLCrYpnOwEgmY409HwVIvvA5aIo7k582LoKgdRCsB87N+f0oWAR0Kg==}
+    dependencies:
+      '@tsconfig/svelte': 1.0.13
+      rrweb: 2.0.0-alpha.4
+    dev: false
+
   /rrweb-snapshot@1.1.14:
     resolution: {integrity: sha512-eP5pirNjP5+GewQfcOQY4uBiDnpqxNRc65yKPW0eSoU1XamDfc4M8oqpXGMyUyvLyxFDB0q0+DChuxxiU2FXBQ==}
+    dev: false
+
+  /rrweb-snapshot@2.0.0-alpha.4:
+    resolution: {integrity: sha512-KQ2OtPpXO5jLYqg1OnXS/Hf+EzqnZyP5A+XPqBCjYpj3XIje/Od4gdUwjbFo3cVuWq5Cw5Y1d3/xwgIS7/XpQQ==}
+    dev: false
+
+  /rrweb-snapshot@2.0.0-alpha.9:
+    resolution: {integrity: sha512-mHg1uUE2iUf0MXLE//4r5cMynkbduwmaOEis4gC7EuqkUAC1pYoLpcYYVt9lD6dgYIF6BmK6dgLLzMpD/tTyyA==}
     dev: false
 
   /rrweb@1.1.3:
@@ -5152,6 +5203,19 @@ packages:
       fflate: 0.4.8
       mitt: 1.2.0
       rrweb-snapshot: 1.1.14
+    dev: false
+
+  /rrweb@2.0.0-alpha.4:
+    resolution: {integrity: sha512-wEHUILbxDPcNwkM3m4qgPgXAiBJyqCbbOHyVoNEVBJzHszWEFYyTbrZqUdeb1EfmTRC2PsumCIkVcomJ/xcOzA==}
+    dependencies:
+      '@rrweb/types': 2.0.0-alpha.9
+      '@types/css-font-loading-module': 0.0.7
+      '@xstate/fsm': 1.6.5
+      base64-arraybuffer: 1.0.2
+      fflate: 0.4.8
+      mitt: 3.0.1
+      rrdom: 0.1.7
+      rrweb-snapshot: 2.0.0-alpha.4
     dev: false
 
   /run-parallel@1.2.0:
