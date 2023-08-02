@@ -26,7 +26,7 @@ const Unhandledrejection: React.FC = () => {
       headerTitle="异步错误"
       ignoreFieldNames={['time']}
       className={styles.container}
-      scroll={{ x: 1200 }}
+      scroll={{ x: 1400}}
       columns={[
         {
           title: '时间',

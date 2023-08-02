@@ -84,10 +84,10 @@ const XhrInfo: React.FC = () => {
                 <p>{entity?.message}</p>
                 <p>
                   请求：{entity?.requestData?.httpType} {entity?.requestData?.method}{' '}
-                  {entity?.requestData?.data}
+                  {JSON.stringify(entity?.requestData?.data)}
                 </p>
                 <p>
-                  响应：{entity?.response?.status} {entity?.response?.data}
+                  响应：{entity?.response?.status} {JSON.stringify(entity?.response?.data)}
                 </p>
               </>
             ) : (
