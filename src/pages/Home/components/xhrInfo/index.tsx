@@ -7,6 +7,7 @@ import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import BreadcrumbBtn from '../btnComponents/breadcrumbBtn'
 import PlayScreen from '../btnComponents/playScreen'
+import { Tooltip } from 'antd'
 
 const XhrInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -79,17 +80,23 @@ const XhrInfo: React.FC = () => {
           hideInSearch: true,
           render(dom, entity) {
             return entity?.requestData ? (
-              <>
-                <p>{entity?.url}</p>
-                <p>{entity?.message}</p>
-                <p>
-                  请求：{entity?.requestData?.httpType} {entity?.requestData?.method}{' '}
-                  {JSON.stringify(entity?.requestData?.data)}
-                </p>
-                <p>
-                  响应：{entity?.response?.status} {JSON.stringify(entity?.response?.data)}
-                </p>
-              </>
+              <Tooltip
+                title={
+                  <>
+                    <p>{entity?.url}</p>
+                    <p>{entity?.message}</p>
+                    <p>
+                      请求：{entity?.requestData?.httpType} {entity?.requestData?.method}{' '}
+                      {JSON.stringify(entity?.requestData?.data)}
+                    </p>
+                    <p>
+                      响应：{entity?.response?.status} {JSON.stringify(entity?.response?.data)}
+                    </p>
+                  </>
+                }
+              >
+                {entity?.message} 更多...
+              </Tooltip>
             ) : (
               '-'
             )
