@@ -11,9 +11,11 @@ import ErrorInfo from './components/errorInfo'
 import XhrInfo from './components/xhrInfo'
 import Resource from './components/resource'
 import PerformanceCharts from './components/chartComponents/performanceCharts'
+import { getUserList } from '@/apis/accessManagement/user'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<string>()
+  const [username, setUsername] = useState<string>()
   const [rangeTime, setRangeTime] = useState<any>([
     getFirstDayOfMonth(new Date()),
     formatToDateTime(new Date())
@@ -23,7 +25,8 @@ const Home: React.FC = () => {
     <MonitorContext.Provider
       value={{
         apikeyType,
-        rangeTime
+        rangeTime,
+        username
       }}
     >
       <ProCard style={{ marginBottom: 16 }}>
@@ -56,6 +59,30 @@ const Home: React.FC = () => {
               onChange: val => {
                 setRangeTime(val)
               }
+            }}
+          />
+          <ProFormSelect
+            placeholder="用户名"
+            fieldProps={{
+              fieldNames: {
+                label: 'username',
+                value: 'username'
+              },
+              onChange: val => {
+                setUsername(val)
+              },
+              value: username,
+              style: { minWidth: 200 }
+            }}
+            request={async () => {
+              const res = await getUserList({
+                pageNum: 1,
+                pageSize: 1000
+              })
+              if (res?.code === 200) {
+                return res?.data?.list
+              }
+              return []
             }}
           />
         </Space>

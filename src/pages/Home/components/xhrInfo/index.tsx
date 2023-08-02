@@ -130,7 +130,7 @@ const XhrInfo: React.FC = () => {
         defaultPageSize: 5
       }}
       rowKey="_time"
-      params={{ apikey: monitorContext?.apikeyType }}
+      params={{ apikey: monitorContext?.apikeyType, userId: monitorContext?.username }}
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
