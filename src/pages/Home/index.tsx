@@ -12,6 +12,7 @@ import XhrInfo from './components/xhrInfo'
 import Resource from './components/resource'
 import PerformanceCharts from './components/chartComponents/performanceCharts'
 import { getUserList } from '@/apis/accessManagement/user'
+import SelectPage, { TAsyncGetListObj } from '@/components/selectPage'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<string>()
@@ -20,6 +21,24 @@ const Home: React.FC = () => {
     getFirstDayOfMonth(new Date()),
     formatToDateTime(new Date())
   ])
+
+  const asyncGetList = async (obj: TAsyncGetListObj) => {
+    const { setPageProps, setOptions, searchVal, pageProps } = obj
+    const res = await getUserList({
+      pageNum: pageProps.current || 1,
+      pageSize: pageProps.pageSize || 10,
+      keyword: searchVal
+    })
+    setPageProps({ total: res?.data?.total })
+    const newData = res?.data?.list?.map((item: any) => {
+      return {
+        ...item,
+        label: item?.username,
+        value: item?.username
+      }
+    })
+    setOptions(newData)
+  }
 
   return (
     <MonitorContext.Provider
@@ -61,7 +80,7 @@ const Home: React.FC = () => {
               }
             }}
           />
-          <ProFormSelect
+          {/* <ProFormSelect
             placeholder="用户名"
             fieldProps={{
               fieldNames: {
@@ -83,6 +102,19 @@ const Home: React.FC = () => {
                 return res?.data?.list
               }
               return []
+            }}
+          /> */}
+          <SelectPage
+            asyncGetList={asyncGetList}
+            value={username}
+            onChange={(val: any) => {
+              setUsername(val)
+            }}
+            selectProps={{
+              placeholder: '用户名',
+              style: { minWidth: 200, marginBottom: 24 },
+              mode: 'signle' as any,
+              allowClear: true
             }}
           />
         </Space>
