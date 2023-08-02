@@ -8,6 +8,7 @@ import styles from '../common.module.less'
 import { Button } from 'antd'
 import BreadcrumbBtn from '../breadcrumbBtn'
 import PlayScreen from '../playScreen'
+import ShowResource from '../showResource'
 
 const ErrorInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -115,9 +116,10 @@ const ErrorInfo: React.FC = () => {
           title: '操作',
           key: 'option',
           valueType: 'option',
-          width: '20%',
+          width: '30%',
           fixed: 'right',
           render: (_, entity) => [
+            <ShowResource record={entity} key="showResource" />,
             <BreadcrumbBtn record={entity} key="behavior" />,
             <PlayScreen key="playScreen" record={entity} formRef={formRef} />
           ]

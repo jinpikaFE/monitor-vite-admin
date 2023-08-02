@@ -27,3 +27,11 @@ export async function getMonitorScreen(params: { id: string }) {
     baseURL: VITE_MONITOR_URL
   })
 }
+
+export async function getFileMap(data: { projectName: string; fileName: string }) {
+  return http.request({
+    url: '/api/v1/files/get',
+    method: 'post',
+    data
+  })
+}

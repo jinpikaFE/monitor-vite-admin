@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "start:mock": "vite --mode mock",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix  ./",
     "lint:style": "stylelint --fix  **/*.{css,less,scss}"
@@ -49,7 +49,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
-    "rrweb-player": "1.0.0-alpha.4"
+    "rrweb-player": "1.0.0-alpha.4",
+    "source-map-js": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",

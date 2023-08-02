@@ -83,6 +83,9 @@ dependencies:
   rrweb-player:
     specifier: 1.0.0-alpha.4
     version: 1.0.0-alpha.4
+  source-map-js:
+    specifier: ^1.0.2
+    version: 1.0.2
 
 devDependencies:
   '@babel/core':
