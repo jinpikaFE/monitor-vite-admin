@@ -6,9 +6,9 @@ import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import { Button } from 'antd'
-import BreadcrumbBtn from '../breadcrumbBtn'
-import PlayScreen from '../playScreen'
-import ShowResource from '../showResource'
+import BreadcrumbBtn from '../btnComponents/breadcrumbBtn'
+import PlayScreen from '../btnComponents/playScreen'
+import ShowResource from '../btnComponents/showResource'
 
 const ErrorInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -100,6 +100,11 @@ const ErrorInfo: React.FC = () => {
               </>
             )
           }
+        },
+        {
+          title: '用户',
+          dataIndex: 'userId',
+          hideInSearch: true
         },
         {
           title: '项目名',

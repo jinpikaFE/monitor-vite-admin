@@ -96,6 +96,11 @@ const PerformanceTable: React.FC = () => {
           }
         },
         {
+          title: '用户',
+          dataIndex: 'userId',
+          hideInSearch: true
+        },
+        {
           title: '项目名',
           dataIndex: 'apikey',
           hideInSearch: true

@@ -3,7 +3,7 @@ import { useReactive } from 'ahooks'
 import ScreenContainer from './screenContainer'
 import { findCodeBySourceMap } from '@/utils/monitor/sourcemap'
 import { useContext } from 'react'
-import { MonitorContext } from '../../context'
+import { MonitorContext } from '../../../context'
 
 export type ModalPropsType = {
   open: boolean

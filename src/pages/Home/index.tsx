@@ -10,7 +10,7 @@ import Unhandledrejection from './components/unhandledrejection'
 import ErrorInfo from './components/errorInfo'
 import XhrInfo from './components/xhrInfo'
 import Resource from './components/resource'
-import PerformanceCharts from './components/performanceCharts'
+import PerformanceCharts from './components/chartComponents/performanceCharts'
 
 const Home: React.FC = () => {
   const [apikeyType, setApikeyType] = useState<string>()

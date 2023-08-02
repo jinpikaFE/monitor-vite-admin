@@ -5,8 +5,8 @@ import { ActionType, FormInstance } from '@ant-design/pro-components'
 import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
-import BreadcrumbBtn from '../breadcrumbBtn'
-import PlayScreen from '../playScreen'
+import BreadcrumbBtn from '../btnComponents/breadcrumbBtn'
+import PlayScreen from '../btnComponents/playScreen'
 
 const XhrInfo: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -94,6 +94,11 @@ const XhrInfo: React.FC = () => {
               '-'
             )
           }
+        },
+        {
+          title: '用户',
+          dataIndex: 'userId',
+          hideInSearch: true
         },
         {
           title: '项目名',
