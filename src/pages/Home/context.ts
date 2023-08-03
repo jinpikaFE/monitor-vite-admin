@@ -1,7 +1,10 @@
 import React from 'react'
 
-export const MonitorContext = React.createContext<{
+export type MonitorType = {
   apikeyType?: string
   rangeTime?: any
   username?: string
-}>({})
+  uuid?: string
+}
+
+export const MonitorContext = React.createContext<MonitorType>({})

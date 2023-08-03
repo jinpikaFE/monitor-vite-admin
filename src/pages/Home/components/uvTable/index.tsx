@@ -5,11 +5,8 @@ import { ActionType, FormInstance } from '@ant-design/pro-components'
 import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
-import BreadcrumbBtn from '../btnComponents/breadcrumbBtn'
-import PlayScreen from '../btnComponents/playScreen'
-import { Tooltip } from 'antd'
 
-const XhrInfo: React.FC = () => {
+const UvTable: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
   const actionRef = useRef<ActionType>()
   const formRef = useRef<FormInstance>()
@@ -23,9 +20,10 @@ const XhrInfo: React.FC = () => {
 
   return (
     <ExcelTable
-      headerTitle="接口错误"
+      headerTitle="UV"
       ignoreFieldNames={['time']}
       className={styles.container}
+      scroll={{ x: 1400 }}
       columns={[
         {
           title: '时间',
@@ -48,6 +46,11 @@ const XhrInfo: React.FC = () => {
           dataIndex: 'uuid',
           hideInSearch: true,
           ellipsis: true
+        },
+        {
+          title: '信息',
+          dataIndex: 'message',
+          hideInSearch: true
         },
         {
           title: '触发地址',
@@ -74,34 +77,7 @@ const XhrInfo: React.FC = () => {
             )
           }
         },
-        {
-          title: '请求信息',
-          dataIndex: 'requestData',
-          hideInSearch: true,
-          render(dom, entity) {
-            return entity?.requestData ? (
-              <Tooltip
-                title={
-                  <>
-                    <p>{entity?.url}</p>
-                    <p>{entity?.message}</p>
-                    <p>
-                      请求：{entity?.requestData?.httpType} {entity?.requestData?.method}{' '}
-                      {JSON.stringify(entity?.requestData?.data)}
-                    </p>
-                    <p>
-                      响应：{entity?.response?.status} {JSON.stringify(entity?.response?.data)}
-                    </p>
-                  </>
-                }
-              >
-                {entity?.message} 更多...
-              </Tooltip>
-            ) : (
-              '-'
-            )
-          }
-        },
+
         {
           title: '用户',
           dataIndex: 'userId',
@@ -117,17 +93,6 @@ const XhrInfo: React.FC = () => {
           dataIndex: '_time',
           hideInSearch: true,
           valueType: 'dateTime'
-        },
-        {
-          title: '操作',
-          key: 'option',
-          valueType: 'option',
-          fixed: 'right',
-          width: '20%',
-          render: (_, entity) => [
-            <BreadcrumbBtn record={entity} key="behavior" />,
-            <PlayScreen key="playScreen" record={entity} formRef={formRef} />
-          ]
         }
       ]}
       form={{
@@ -145,7 +110,7 @@ const XhrInfo: React.FC = () => {
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
-          type: EVENTTYPES.API_ERR
+          type: EVENTTYPES.UV
         })
         return data
       }}
@@ -157,4 +122,4 @@ const XhrInfo: React.FC = () => {
   )
 }
 
-export default XhrInfo
+export default UvTable

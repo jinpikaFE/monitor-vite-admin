@@ -1,8 +1,12 @@
-import { ProCard, ProFormDateTimeRangePicker, ProFormSelect } from '@ant-design/pro-components'
+import {
+  ProCard,
+  ProFormDateTimeRangePicker,
+  ProFormSelect,
+  ProFormText
+} from '@ant-design/pro-components'
 import PerformanceTable from './components/performanceTable'
 import { getApikeyList } from '@/apis/projects'
-import { useState } from 'react'
-import { MonitorContext } from './context'
+import { MonitorContext, MonitorType } from './context'
 import { Space } from 'antd'
 import { getFirstDayOfMonth } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
@@ -13,14 +17,16 @@ import Resource from './components/resource'
 import PerformanceCharts from './components/chartComponents/performanceCharts'
 import { getUserList } from '@/apis/accessManagement/user'
 import SelectPage, { TAsyncGetListObj } from '@/components/selectPage'
+import UvTable from './components/uvTable'
+import { useReactive } from 'ahooks'
 
 const Home: React.FC = () => {
-  const [apikeyType, setApikeyType] = useState<string>()
-  const [username, setUsername] = useState<string>()
-  const [rangeTime, setRangeTime] = useState<any>([
-    getFirstDayOfMonth(new Date()),
-    formatToDateTime(new Date())
-  ])
+  const FormVal = useReactive<MonitorType>({
+    apikeyType: undefined,
+    username: undefined,
+    rangeTime: [getFirstDayOfMonth(new Date()), formatToDateTime(new Date())],
+    uuid: undefined
+  })
 
   const asyncGetList = async (obj: TAsyncGetListObj) => {
     const { setPageProps, setOptions, searchVal, pageProps } = obj
@@ -43,9 +49,10 @@ const Home: React.FC = () => {
   return (
     <MonitorContext.Provider
       value={{
-        apikeyType,
-        rangeTime,
-        username
+        apikeyType: FormVal.apikeyType,
+        rangeTime: FormVal.rangeTime,
+        username: FormVal.username,
+        uuid: FormVal.uuid
       }}
     >
       <ProCard style={{ marginBottom: 16 }}>
@@ -58,15 +65,15 @@ const Home: React.FC = () => {
                 value: 'name'
               },
               onChange: val => {
-                setApikeyType(val)
+                FormVal.apikeyType = val
               },
-              value: apikeyType,
+              value: FormVal.apikeyType,
               style: { minWidth: 200 }
             }}
             request={async () => {
               const res = await getApikeyList()
               if (res?.code === 200) {
-                setApikeyType(res?.data?.list?.[0]?.name)
+                FormVal.apikeyType = res?.data?.list?.[0]?.name
                 return res?.data?.list
               }
               return []
@@ -74,9 +81,9 @@ const Home: React.FC = () => {
           />
           <ProFormDateTimeRangePicker
             fieldProps={{
-              value: rangeTime,
+              value: FormVal.rangeTime,
               onChange: val => {
-                setRangeTime(val)
+                FormVal.rangeTime = val
               }
             }}
           />
@@ -106,9 +113,9 @@ const Home: React.FC = () => {
           /> */}
           <SelectPage
             asyncGetList={asyncGetList}
-            value={username}
+            value={FormVal.username}
             onChange={(val: any) => {
-              setUsername(val)
+              FormVal.username = val
             }}
             selectProps={{
               placeholder: '用户名',
@@ -117,9 +124,22 @@ const Home: React.FC = () => {
               allowClear: true
             }}
           />
+          <ProFormText
+            placeholder="访客标识"
+            allowClear
+            fieldProps={{
+              value: FormVal.uuid,
+              onChange: e => {
+                FormVal.uuid = e?.target?.value
+              }
+            }}
+          />
         </Space>
       </ProCard>
       <PerformanceCharts />
+      <ProCard ghost gutter={[16, 16]} style={{ marginBottom: 16 }}>
+        <UvTable />
+      </ProCard>
       <ProCard ghost gutter={[16, 16]}>
         <PerformanceTable />
       </ProCard>
@@ -131,14 +151,11 @@ const Home: React.FC = () => {
           <Unhandledrejection />
         </ProCard>
       </ProCard>
-      <ProCard ghost gutter={[16, 16]} wrap>
+      <ProCard ghost gutter={[16, 16]} wrap style={{ marginBottom: 16 }}>
         <XhrInfo />
       </ProCard>
-      <ProCard ghost gutter={[16, 16]}>
-        <ProCard ghost colSpan={12}>
-          <Resource />
-        </ProCard>
-        <ProCard ghost>{/* <FetchInfo /> */}</ProCard>
+      <ProCard ghost gutter={[16, 16]} style={{ marginBottom: 16 }}>
+        <Resource />
       </ProCard>
     </MonitorContext.Provider>
   )

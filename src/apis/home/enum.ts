@@ -19,7 +19,9 @@ export enum EVENTTYPES {
   /** 录屏信息 */
   RECORDSCREEN = 'recordScreen',
   /** 白屏 */
-  WHITESCREEN = 'whiteScreen'
+  WHITESCREEN = 'whiteScreen',
+  /** uv */
+  UV = 'uv'
 }
 
 /** 性能指标名 */

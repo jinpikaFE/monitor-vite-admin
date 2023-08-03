@@ -119,7 +119,11 @@ const PerformanceTable: React.FC = () => {
         defaultPageSize: 5
       }}
       rowKey="_time"
-      params={{ apikey: monitorContext?.apikeyType, userId: monitorContext?.username }}
+      params={{
+        apikey: monitorContext?.apikeyType,
+        userId: monitorContext?.username,
+        uuid: monitorContext?.uuid
+      }}
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,

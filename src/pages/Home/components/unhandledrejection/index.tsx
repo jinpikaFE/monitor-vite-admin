@@ -26,7 +26,7 @@ const Unhandledrejection: React.FC = () => {
       headerTitle="异步错误"
       ignoreFieldNames={['time']}
       className={styles.container}
-      scroll={{ x: 1400}}
+      scroll={{ x: 1400 }}
       columns={[
         {
           title: '时间',
@@ -136,7 +136,11 @@ const Unhandledrejection: React.FC = () => {
         defaultPageSize: 5
       }}
       rowKey="_time"
-      params={{ apikey: monitorContext?.apikeyType, userId: monitorContext?.username }}
+      params={{
+        apikey: monitorContext?.apikeyType,
+        userId: monitorContext?.username,
+        uuid: monitorContext?.uuid
+      }}
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
