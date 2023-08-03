@@ -19,6 +19,7 @@ import { getUserList } from '@/apis/accessManagement/user'
 import SelectPage, { TAsyncGetListObj } from '@/components/selectPage'
 import UvTable from './components/uvTable'
 import { useReactive } from 'ahooks'
+import PvTable from './components/pvTable'
 
 const Home: React.FC = () => {
   const FormVal = useReactive<MonitorType>({
@@ -137,6 +138,9 @@ const Home: React.FC = () => {
         </Space>
       </ProCard>
       <PerformanceCharts />
+      <ProCard ghost gutter={[16, 16]} style={{ marginBottom: 16 }}>
+        <PvTable />
+      </ProCard>
       <ProCard ghost gutter={[16, 16]} style={{ marginBottom: 16 }}>
         <UvTable />
       </ProCard>

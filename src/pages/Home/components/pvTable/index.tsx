@@ -7,7 +7,7 @@ import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import { formatToDateTime } from '@/utils/dateUtil'
 
-const UvTable: React.FC = () => {
+const PvTable: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
   const actionRef = useRef<ActionType>()
   const formRef = useRef<FormInstance>()
@@ -21,7 +21,7 @@ const UvTable: React.FC = () => {
 
   return (
     <ExcelTable
-      headerTitle="UV"
+      headerTitle="PV"
       ignoreFieldNames={['time']}
       className={styles.container}
       scroll={{ x: 1400 }}
@@ -49,19 +49,11 @@ const UvTable: React.FC = () => {
           ellipsis: true
         },
         {
-          title: '访问IP',
+          title: 'pv路由',
           dataIndex: 'message',
           hideInSearch: true,
           render(dom, entity) {
-            return entity?.message?.ip || '-'
-          }
-        },
-        {
-          title: '访问地区',
-          dataIndex: 'message',
-          hideInSearch: true,
-          render(dom, entity) {
-            return entity?.message?.area || '-'
+            return entity?.message?.pathname || '-'
           }
         },
         {
@@ -130,7 +122,7 @@ const UvTable: React.FC = () => {
       requestFn={async params => {
         const data = await getMonitorList({
           ...params,
-          type: EVENTTYPES.UV
+          type: EVENTTYPES.PV
         })
         return data
       }}
@@ -142,4 +134,4 @@ const UvTable: React.FC = () => {
   )
 }
 
-export default UvTable
+export default PvTable

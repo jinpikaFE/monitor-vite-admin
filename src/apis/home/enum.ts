@@ -21,7 +21,9 @@ export enum EVENTTYPES {
   /** 白屏 */
   WHITESCREEN = 'whiteScreen',
   /** uv */
-  UV = 'uv'
+  UV = 'uv',
+  /** PV */
+  PV = 'pv'
 }
 
 /** 性能指标名 */
