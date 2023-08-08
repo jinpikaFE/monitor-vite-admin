@@ -112,7 +112,17 @@ const Home: React.FC = () => {
               return []
             }}
           /> */}
-          <SelectPage
+          <ProFormText
+            placeholder="用户名"
+            allowClear
+            fieldProps={{
+              value: FormVal.username,
+              onChange: e => {
+                FormVal.username = e?.target?.value
+              }
+            }}
+          />
+          {/* <SelectPage
             asyncGetList={asyncGetList}
             value={FormVal.username}
             onChange={(val: any) => {
@@ -124,7 +134,7 @@ const Home: React.FC = () => {
               mode: 'signle' as any,
               allowClear: true
             }}
-          />
+          /> */}
           <ProFormText
             placeholder="访客标识"
             allowClear
