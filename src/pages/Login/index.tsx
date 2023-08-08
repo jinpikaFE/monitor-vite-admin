@@ -44,37 +44,39 @@ const Login = () => {
         subTitle="全球最大的代码托管平台"
         onFinish={async (val: Login.LoginEntity) => {
           const res = await login(val)
-          storage.set('token', res?.data?.token)
+          if (res?.code === 200) {
+            storage.set('token', res?.data?.token)
 
-          /** 跳转有权限的第一个菜单 */
-          await storeGlobalUser.getUserDetail()
-          const flattenRoutes: (routes: RouteType[]) => RouteType[] = (routes: RouteType[]) => {
-            const flattenedRoutes: RouteType[] = []
-            function traverse(routes: RouteType[]) {
-              routes.forEach(route => {
-                flattenedRoutes.push(route)
-                if (route.children) {
-                  traverse(route.children)
-                }
-              })
+            /** 跳转有权限的第一个菜单 */
+            await storeGlobalUser.getUserDetail()
+            const flattenRoutes: (routes: RouteType[]) => RouteType[] = (routes: RouteType[]) => {
+              const flattenedRoutes: RouteType[] = []
+              function traverse(routes: RouteType[]) {
+                routes.forEach(route => {
+                  flattenedRoutes.push(route)
+                  if (route.children) {
+                    traverse(route.children)
+                  }
+                })
+              }
+
+              traverse(routes)
+
+              return flattenedRoutes
             }
-
-            traverse(routes)
-
-            return flattenedRoutes
+            const resRoutes = flattenRoutes(routers)
+            const findPath =
+              resRoutes?.[
+                resRoutes?.findIndex(
+                  item =>
+                    item?.name ===
+                    storeGlobalUser?.userInfo?.menus?.filter(
+                      citem => citem?.type === ComponTypeEnum.MENU
+                    )?.[0]?.title
+                )
+              ]?.path
+            navigate(findPath || '/')
           }
-          const resRoutes = flattenRoutes(routers)
-          const findPath =
-            resRoutes?.[
-              resRoutes?.findIndex(
-                item =>
-                  item?.name ===
-                  storeGlobalUser?.userInfo?.menus?.filter(
-                    citem => citem?.type === ComponTypeEnum.MENU
-                  )?.[0]?.title
-              )
-            ]?.path
-          navigate(findPath || '/')
         }}
         activityConfig={{
           style: {
