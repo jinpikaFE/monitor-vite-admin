@@ -11,9 +11,10 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import Test from '@/pages/Test'
 import TestChild from '@/pages/Test/TestChild'
-import { HomeFilled, LockOutlined, SmileFilled } from '@ant-design/icons'
+import { BarChartOutlined, HomeFilled, LockOutlined, SmileFilled } from '@ant-design/icons'
 import { Navigate } from 'react-router-dom'
 import projects from './projects'
+import DashBoard from '@/pages/DashBoard'
 
 export const routers = [
   {
@@ -28,6 +29,13 @@ export const routers = [
     errorElement: <ErrorPage />,
     icon: <SmileFilled />,
     children: [
+      {
+        path: '/dashBoard',
+        name: '工作台',
+        icon: <BarChartOutlined />,
+        element: <DashBoard />,
+        permissionObj: true
+      },
       /** 布局下路由，页面路由在该children配置 */
       {
         path: '/home',
