@@ -1,6 +1,7 @@
 import { SourceMapConsumer } from 'source-map-js'
 import { message } from 'antd'
 import { getFileMap } from '@/apis/home'
+import { storage } from '../Storage'
 
 // 找到以.js结尾的fileName
 function matchStr(str: string): string | undefined {
@@ -29,8 +30,17 @@ export const findCodeBySourceMap = async (
   callback: (html: string) => void
 ): Promise<void> => {
   console.log('fileName', fileName)
-  const sourceData = await loadSourceMap(fileName, projectName)
+  let sourceData = await loadSourceMap(fileName, projectName)
   if (!sourceData) return
+
+  /** 进行前端缓存 */
+  const key = projectName + fileName
+  if (storage.get(key)) {
+    sourceData = storage.get(key)
+  } else {
+    storage.set(key, 'sourceData')
+  }
+
   const { sourcesContent, sources } = sourceData
   const consumer = await new SourceMapConsumer(sourceData)
   const result = consumer.originalPositionFor({
