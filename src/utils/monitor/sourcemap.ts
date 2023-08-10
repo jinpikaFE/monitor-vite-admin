@@ -27,7 +27,7 @@ async function loadSourceMap(fileName: string, projectName: string): Promise<any
       projectName
     })
     data = response?.data
-    storage.set(key, response?.data)
+    // storage.set(key, response?.data)
   }
 
   return JSON.parse(data)
