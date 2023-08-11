@@ -102,7 +102,7 @@ const PvTable: React.FC = () => {
         },
         {
           title: '结束时间',
-          dataIndex: '_time',
+          dataIndex: 'time',
           hideInSearch: true,
           valueType: 'dateTime'
         }
@@ -113,7 +113,7 @@ const PvTable: React.FC = () => {
       pagination={{
         defaultPageSize: 5
       }}
-      rowKey="_time"
+      rowKey="_id"
       params={{
         apikey: monitorContext?.apikeyType,
         userId: monitorContext?.username,

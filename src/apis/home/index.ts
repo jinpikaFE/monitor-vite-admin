@@ -4,7 +4,7 @@ const VITE_MONITOR_URL = import.meta.env.VITE_MONITOR_URL
 
 export async function getMonitorList(params: Partial<Monitor.MonitorParams> & Global.PageParams) {
   return http.request({
-    url: '/v1/monitor',
+    url: '/v1/mgb/monitor',
     method: 'get',
     params,
     baseURL: VITE_MONITOR_URL

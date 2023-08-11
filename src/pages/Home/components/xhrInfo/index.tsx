@@ -114,7 +114,7 @@ const XhrInfo: React.FC = () => {
         },
         {
           title: '时间',
-          dataIndex: '_time',
+          dataIndex: 'time',
           hideInSearch: true,
           valueType: 'dateTime'
         },
@@ -136,7 +136,7 @@ const XhrInfo: React.FC = () => {
       pagination={{
         defaultPageSize: 5
       }}
-      rowKey="_time"
+      rowKey="_id"
       params={{
         apikey: monitorContext?.apikeyType,
         userId: monitorContext?.username,
