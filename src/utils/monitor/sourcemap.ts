@@ -40,7 +40,11 @@ export const findCodeBySourceMap = async (
 ): Promise<void> => {
   console.log('fileName', fileName)
   const sourceData = await loadSourceMap(fileName, projectName)
-  if (!sourceData) return
+  if (!sourceData) {
+    message.destroy('loadingsource')
+    message.info('源码数据不存在')
+    return
+  }
 
   const { sourcesContent, sources } = sourceData
   const consumer = await new SourceMapConsumer(sourceData)
@@ -59,6 +63,7 @@ export const findCodeBySourceMap = async (
    * }
    * */
   if (result.source && result.source.includes('node_modules')) {
+    message.destroy('loadingsource')
     // 三方报错解析不了，因为缺少三方的map文件，
     // 比如echart报错 webpack://web-see/node_modules/.pnpm/echarts@5.4.1/node_modules/echarts/lib/util/model.js
     message.error(`源码解析失败: 因为报错来自三方依赖，报错文件为 ${result.source}`)
@@ -77,6 +82,7 @@ export const findCodeBySourceMap = async (
   }
   console.log('index', index)
   if (index === -1) {
+    message.destroy('loadingsource')
     message.error('源码解析失败')
     return
   }

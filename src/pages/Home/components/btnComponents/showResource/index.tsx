@@ -1,4 +1,4 @@
-import { Button, Modal } from 'antd'
+import { Button, Modal, message } from 'antd'
 import { useReactive } from 'ahooks'
 import ScreenContainer from './screenContainer'
 import { findCodeBySourceMap } from '@/utils/monitor/sourcemap'
@@ -25,10 +25,20 @@ const ShowResource: React.FC<{
         key="playScreen"
         type="primary"
         onClick={async () => {
-          findCodeBySourceMap(monitorContext.apikeyType || '', record, res => {
-            modalProps.open = true
-            modalProps.html = res
+          message.loading({
+            content: '加载中',
+            key: 'loadingsource',
+            duration: 0
           })
+          try {
+            findCodeBySourceMap(record?.apikey || '', record, res => {
+              modalProps.open = true
+              modalProps.html = res
+              message.destroy('loadingsource')
+            })
+          } catch (error) {
+            message.destroy('loadingsource')
+          }
         }}
       >
         查看源码

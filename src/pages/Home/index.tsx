@@ -74,7 +74,6 @@ const Home: React.FC = () => {
             request={async () => {
               const res = await getApikeyList()
               if (res?.code === 200) {
-                FormVal.apikeyType = res?.data?.list?.[0]?.name
                 return res?.data?.list
               }
               return []
