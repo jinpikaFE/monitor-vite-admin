@@ -3,6 +3,7 @@ import { DashBoardContext } from './context'
 import { ProCard, ProFormDateTimeRangePicker } from '@ant-design/pro-components'
 import { getFirstDayOfYear } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
+import StaticCard from './components/staticCard'
 
 const DashBoard = () => {
   const formVal = useReactive<DashBoardPage.ContextEntity>({
@@ -18,12 +19,13 @@ const DashBoard = () => {
         <ProFormDateTimeRangePicker
           fieldProps={{
             value: formVal.rangeTime,
-            onChange: val => {
-              formVal.rangeTime = val
+            onChange: (_, dateString) => {
+              formVal.rangeTime = dateString
             }
           }}
         />
       </ProCard>
+      <StaticCard />
     </DashBoardContext.Provider>
   )
 }

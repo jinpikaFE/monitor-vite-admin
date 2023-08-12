@@ -82,8 +82,8 @@ const Home: React.FC = () => {
           <ProFormDateTimeRangePicker
             fieldProps={{
               value: FormVal.rangeTime,
-              onChange: val => {
-                FormVal.rangeTime = val
+              onChange: (_, dateString) => {
+                FormVal.rangeTime = dateString
               }
             }}
           />
