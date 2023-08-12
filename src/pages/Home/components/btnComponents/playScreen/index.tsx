@@ -28,7 +28,7 @@ const PlayScreen: React.FC<{
           })
           if (res?.code === 200) {
             modalProps.open = true
-            modalProps.events = res?.data?.[0]?.events
+            modalProps.events = res?.data?.events
           }
         }}
       >
