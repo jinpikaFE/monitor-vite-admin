@@ -4,6 +4,7 @@ import { ProCard, ProFormDateTimeRangePicker } from '@ant-design/pro-components'
 import { getFirstDayOfYear } from '@/utils/date'
 import { formatToDateTime } from '@/utils/dateUtil'
 import StaticCard from './components/staticCard'
+import AmapCard from './components/amapCard'
 
 const DashBoard = () => {
   const formVal = useReactive<DashBoardPage.ContextEntity>({
@@ -26,6 +27,7 @@ const DashBoard = () => {
         />
       </ProCard>
       <StaticCard />
+      <AmapCard />
     </DashBoardContext.Provider>
   )
 }

@@ -9,6 +9,7 @@ import {
 } from '@/apis/accessManagement/role'
 import PunkEffectButton2 from '@/components/ButtonDy/PunkEffectButton2'
 import ExcelTable from '@/components/exportExcel'
+import { storeGlobalUser } from '@/store/globalUser'
 import {
   ActionType,
   ProForm,
@@ -31,7 +32,10 @@ const RoleManangement: React.FC = () => {
     const relVal = {
       ...val
     }
-
+    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+      return Promise.reject()
+    }
     if (record) {
       // 编辑
       const res = await editRole({
@@ -78,7 +82,7 @@ const RoleManangement: React.FC = () => {
           <ProFormText label="角色名称" name="name" rules={[{ required: true }]} />
           <ProFormTextArea label="描述" name="description" rules={[{ required: true }]} />
           <ProFormRadio.Group
-            label="是否启用"
+            label="是否显示"
             name="status"
             rules={[{ required: true }]}
             valueEnum={
@@ -173,7 +177,14 @@ const RoleManangement: React.FC = () => {
             return (
               <Switch
                 checked={Boolean(entity?.status)}
+                disabled={entity?.name === '超级管理员'}
                 onChange={async val => {
+                  if (
+                    !storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')
+                  ) {
+                    message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+                    return Promise.reject()
+                  }
                   const res = await editRoleStatus({
                     id: entity.id,
                     status: +val
@@ -200,14 +211,24 @@ const RoleManangement: React.FC = () => {
           key: 'option',
           valueType: 'option',
           render: (_, record) => [
-            <Button key="edit" type="link" onClick={() => showModal(record)}>
+            <Button
+              key="edit"
+              type="link"
+              onClick={() => showModal(record)}
+              disabled={record?.name=== '超级管理员'}
+            >
               编辑
             </Button>,
             <Popconfirm
               key="delete"
               placement="topRight"
               title="确定要删除吗?"
+              disabled={record?.name=== '超级管理员'}
               onConfirm={async () => {
+                if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+                  message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+                  return Promise.reject()
+                }
                 const res = await delRole({ ids: record?.id })
                 if (res?.code === 200) {
                   message.success('删除成功')
@@ -220,7 +241,7 @@ const RoleManangement: React.FC = () => {
               okType="danger"
               cancelText="取消"
             >
-              <Button type="link" danger key="delete">
+              <Button type="link" danger key="delete" disabled={record?.name=== '超级管理员'}>
                 删除
               </Button>
             </Popconfirm>

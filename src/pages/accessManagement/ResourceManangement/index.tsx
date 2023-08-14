@@ -6,6 +6,7 @@ import {
 } from '@/apis/accessManagement/resource'
 import PunkEffectButton2 from '@/components/ButtonDy/PunkEffectButton2'
 import ExcelTable from '@/components/exportExcel'
+import { storeGlobalUser } from '@/store/globalUser'
 import {
   ActionType,
   ProForm,
@@ -24,6 +25,10 @@ const ResourceManangement: React.FC = () => {
 
   const onSubmit = async (record?: Resource.ResourceCategoryEntity) => {
     const val = await modalFormRef?.current?.validateFields()
+    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+      return Promise.reject()
+    }
     if (record) {
       // 编辑
       const res = await editResourceCategory({
@@ -120,6 +125,10 @@ const ResourceManangement: React.FC = () => {
               placement="topRight"
               title="确定要删除吗?"
               onConfirm={async () => {
+                if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+                  message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+                  return Promise.reject()
+                }
                 const res = await delResourceCategory({ id: record?.id })
                 if (res?.code === 200) {
                   message.success('删除成功')

@@ -28,6 +28,12 @@ const UserManagement: React.FC = () => {
       ...val,
       icon: val?.icon?.[0]
     }
+
+    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+      return Promise.reject()
+    }
+
     if (record) {
       // 编辑
       const res = await editUser({
@@ -195,9 +201,19 @@ const UserManagement: React.FC = () => {
           render(dom, entity) {
             return (
               <Switch
-                disabled={entity?.username === storeGlobalUser?.userInfo?.username}
+                disabled={
+                  entity?.username === storeGlobalUser?.userInfo?.username ||
+                  entity?.username === 'admin'
+                }
                 checked={Boolean(entity?.status)}
                 onChange={async val => {
+                  if (
+                    !storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')
+                  ) {
+                    message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+                    actionRef?.current?.reload()
+                    return Promise.reject()
+                  }
                   const res = await editUser({
                     id: entity.id,
                     status: +val
@@ -222,16 +238,26 @@ const UserManagement: React.FC = () => {
               key="edit"
               type="link"
               onClick={() => showModal(record)}
-              disabled={record?.username === storeGlobalUser?.userInfo?.username}
+              disabled={
+                record?.username === storeGlobalUser?.userInfo?.username ||
+                record?.username === 'admin'
+              }
             >
               编辑
             </Button>,
             <Popconfirm
-              disabled={record?.username === storeGlobalUser?.userInfo?.username}
+              disabled={
+                record?.username === storeGlobalUser?.userInfo?.username ||
+                record?.username === 'admin'
+              }
               key="delete"
               placement="topRight"
               title="确定要删除吗?"
               onConfirm={async () => {
+                if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+                  message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+                  return Promise.reject()
+                }
                 const res = await delUser({ id: record?.id })
                 if (res?.code === 200) {
                   message.success('删除成功')
@@ -248,7 +274,10 @@ const UserManagement: React.FC = () => {
                 type="link"
                 danger
                 key="delete"
-                disabled={record?.username === storeGlobalUser?.userInfo?.username}
+                disabled={
+                  record?.username === storeGlobalUser?.userInfo?.username ||
+                  record?.username === 'admin'
+                }
               >
                 删除
               </Button>

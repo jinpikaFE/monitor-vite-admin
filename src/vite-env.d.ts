@@ -12,4 +12,7 @@ interface ImportMeta {
 
 interface Window {
   COS: any
+  /** 高德地图api */
+  AMap:any
+  Loca:any
 }
