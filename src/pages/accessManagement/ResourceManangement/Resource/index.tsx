@@ -25,12 +25,13 @@ const Resource: React.FC = () => {
 
   const onSubmit = async (record?: Resource.ResourceCategoryEntity) => {
     const val = await modalFormRef?.current?.validateFields()
-    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
-      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
-      return Promise.reject()
-    }
+
     if (record) {
       // 编辑
+      if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+        message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+        return Promise.reject()
+      }
       const res = await editResource({
         ...val,
         id: record?.id,

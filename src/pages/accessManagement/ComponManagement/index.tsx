@@ -26,10 +26,6 @@ const ComponManagement: React.FC = () => {
 
   const onSubmit = async (record?: Resource.ResourceCategoryEntity, isCreateNext?: boolean) => {
     const val = await modalFormRef?.current?.validateFields()
-    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
-      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
-      return Promise.reject()
-    }
     if (record) {
       if (isCreateNext) {
         // 添加下级
@@ -42,6 +38,10 @@ const ComponManagement: React.FC = () => {
         return Promise.reject()
       }
       // 编辑
+      if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+        message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+        return Promise.reject()
+      }
       const res = await editCompon({
         ...val,
         id: record?.id

@@ -13,7 +13,6 @@ import { storeGlobalUser } from '@/store/globalUser'
 import {
   ActionType,
   ProForm,
-  ProFormCascader,
   ProFormInstance,
   ProFormRadio,
   ProFormText,
@@ -32,12 +31,12 @@ const RoleManangement: React.FC = () => {
     const relVal = {
       ...val
     }
-    if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
-      message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
-      return Promise.reject()
-    }
     if (record) {
       // 编辑
+      if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
+        message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
+        return Promise.reject()
+      }
       const res = await editRole({
         ...relVal,
         id: record?.id
@@ -215,7 +214,7 @@ const RoleManangement: React.FC = () => {
               key="edit"
               type="link"
               onClick={() => showModal(record)}
-              disabled={record?.name=== '超级管理员'}
+              disabled={record?.name === '超级管理员'}
             >
               编辑
             </Button>,
@@ -223,7 +222,7 @@ const RoleManangement: React.FC = () => {
               key="delete"
               placement="topRight"
               title="确定要删除吗?"
-              disabled={record?.name=== '超级管理员'}
+              disabled={record?.name === '超级管理员'}
               onConfirm={async () => {
                 if (!storeGlobalUser?.userInfo?.roles?.find(item => item?.name === '超级管理员')) {
                   message.error('仅支持添加操作，其他服务暂不支持操作，请自行部署操作')
@@ -241,7 +240,7 @@ const RoleManangement: React.FC = () => {
               okType="danger"
               cancelText="取消"
             >
-              <Button type="link" danger key="delete" disabled={record?.name=== '超级管理员'}>
+              <Button type="link" danger key="delete" disabled={record?.name === '超级管理员'}>
                 删除
               </Button>
             </Popconfirm>
