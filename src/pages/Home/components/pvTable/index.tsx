@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { MonitorContext } from '../../context'
 import styles from '../common.module.less'
 import { formatToDateTime } from '@/utils/dateUtil'
+import BreadcrumbBtn from '../btnComponents/breadcrumbBtn'
 
 const PvTable: React.FC = () => {
   const monitorContext = useContext(MonitorContext)
@@ -105,6 +106,16 @@ const PvTable: React.FC = () => {
           dataIndex: 'time',
           hideInSearch: true,
           valueType: 'dateTime'
+        },
+        {
+          title: '操作',
+          key: 'option',
+          valueType: 'option',
+          width: '10%',
+          fixed: 'right',
+          render: (_, entity) => [
+            <BreadcrumbBtn record={entity} key="behavior" />,
+          ]
         }
       ]}
       form={{
